@@ -1,1 +1,58 @@
-<p>login works!</p>
+<main class="vh-100 d-flex align-items-center justify-content-center">
+  <section class="card p-4 shadow border-rounded py-auto w-50">
+    <h2 class="font-medium text-center">Welcome Back</h2>
+    <form [formGroup]="loginForm" class="form">
+      <article class="mb-3">
+        <label for="email" class="form-label font-medium"> Email </label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Email address"
+          class="form-control"
+        />
+        <span *ngIf="validInput('email')" class="text-danger form-text">
+          Please enter a valid email address
+        </span>
+      </article>
+
+      <article class="mb-3">
+        <label for="password" class="form-label font-medium"> Password </label>
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          class="form-control"
+        />
+        <span *ngIf="validInput('password')" class="text-danger form-text">
+          Please enter a valid password
+        </span>
+      </article>
+
+      <article class="d-flex align-items-center justify-content-between mb-3">
+        <a
+          href="/restore-password"
+          class="font-medium text-decoration-none ml-2 text-primary text-end"
+        >
+          Forgot password?
+        </a>
+        <div class="text-center">
+          <span class="font-medium line-height-3">
+            Don't have an account?
+            <a
+              href="/register"
+              class="font-medium text-decoration-none ml-2 text-primary"
+            >
+              Create today!
+            </a>
+          </span>
+        </div>
+      </article>
+
+      <button type="button" class="btn btn-primary w-100" (click)="onSubmit()">
+        Sign In
+      </button>
+    </form>
+  </section>
+</main>

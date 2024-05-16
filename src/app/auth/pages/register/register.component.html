@@ -1,1 +1,83 @@
-<p>register works!</p>
+<main class="vh-100 d-flex align-items-center justify-content-center">
+  <section class="card p-4 shadow border-rounded py-auto w-50">
+    <h2 class="font-medium text-center">Register</h2>
+    <form [formGroup]="registerForm" class="form">
+      <article class="mb-3">
+        <label for="username" class="form-label font-medium">Username</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="Username"
+          class="form-control"
+        />
+        <span *ngIf="validInput('username')" class="text-danger form-text">
+          Please enter a valid username
+        </span>
+      </article>
+
+      <article class="mb-3">
+        <label for="email" class="form-label font-medium">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Email address"
+          class="form-control"
+        />
+        <span *ngIf="validInput('email')" class="text-danger form-text">
+          Please enter a valid email address
+        </span>
+      </article>
+
+      <article class="mb-3">
+        <label for="password" class="form-label font-medium">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+          class="form-control"
+        />
+        <span *ngIf="validInput('password')" class="text-danger form-text">
+          Please enter a valid password
+        </span>
+      </article>
+
+      <article class="mb-3">
+        <label for="confirmPassword" class="form-label font-medium"
+          >Confirm Password</label
+        >
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Confirm Password"
+          class="form-control"
+        />
+        <span
+          *ngIf="validInput('confirmPassword')"
+          class="text-danger form-text"
+        >
+          Please confirm your password
+        </span>
+      </article>
+      <article class="d-flex align-items-center justify-content-between mb-3">
+        <div class="ms-auto">
+          <span class="font-medium line-height-3">
+            Already registered?
+            <a
+              href="/login"
+              class="font-medium text-decoration-none ml-2 text-primary"
+            >
+              Sign in now!
+            </a>
+          </span>
+        </div>
+      </article>
+      <button type="button" class="btn btn-primary w-100" (click)="onSubmit()">
+        Sign Up
+      </button>
+    </form>
+  </section>
+</main>
