@@ -7,7 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../auth.service';
-import { Register } from '../../interfaces/Login';
+import { Register } from '../../interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,11 @@ import { Register } from '../../interfaces/Login';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -33,12 +38,21 @@ export class RegisterComponent {
     );
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
-
-    this.authService.register(this.registerForm.getRawValue() as Register);
+    try {
+      const response = await this.authService.register(
+        this.registerForm.getRawValue() as Register
+      );
+      if (response.status === 201) {
+        console.log('User created');
+        this.router.navigate(['/auth/login']);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
