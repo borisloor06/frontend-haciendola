@@ -9,6 +9,7 @@ const routes: Routes = [
       import('./auth/pages/register/register.component').then(
         (m) => m.RegisterComponent
       ),
+    canActivate: [authGuard],
   },
   {
     path: 'login',
@@ -21,7 +22,9 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () =>
-      import('./dashboard/layout/dashboard.component').then((m) => m.DashboardComponent),
+      import('./dashboard/layout/dashboard.component').then(
+        (m) => m.DashboardComponent
+      ),
     canActivate: [authGuard],
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },

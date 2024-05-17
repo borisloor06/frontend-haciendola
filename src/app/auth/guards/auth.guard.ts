@@ -7,7 +7,7 @@ export const authGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
   const token = localStorage.getItem('token');
 
-  if (state.url === '/login' && !token) {
+  if ((state.url === '/login' || state.url === '/register') && !token) {
     return true;
   }
 
@@ -18,7 +18,7 @@ export const authGuard: CanActivateFn = async (route, state) => {
   }
 
   const response = await authService.validateToken(token);
-  if (state.url === '/login' && token) {
+  if ((state.url === '/login' || state.url === '/register') && token) {
     if (response.status === 200 && response.body!.valid) {
       router.navigate(['/dashboard']);
       return true;
